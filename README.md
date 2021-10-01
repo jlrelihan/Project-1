@@ -18,6 +18,16 @@ Jennifer Relihan
         default is “united-states”. Put a “-” in between each part of
         the country name if
         necessary.](#returns-the-number-of-cases-for-confirmed-active-deaths-and-recovered-for-the-country-of-interest-user-specifiedthe-default-is-united-states-put-a---in-between-each-part-of-the-country-name-if-necessary)
+    -   [Returns all live cases for a country of interest. The default
+        is “united-states”. Put a “-” in between each part of the
+        country name if necessary. You can also specify a date in the
+        format “2021-07-12T00:00:00Z” and the
+        Province.](#returns-all-live-cases-for-a-country-of-interest-the-default-is-united-states-put-a---in-between-each-part-of-the-country-name-if-necessary-you-can-also-specify-a-date-in-the-format-2021-07-12t000000z-and-the-province)
+    -   [Returns the world total for confirmed, deaths, and recovered
+        cases](#returns-the-world-total-for-confirmed-deaths-and-recovered-cases)
+    -   [Returns all cases by case type for a country from the first
+        recorded case. Cases must be one of: confirmed, recovered,
+        deaths.](#returns-all-cases-by-case-type-for-a-country-from-the-first-recorded-case-cases-must-be-one-of-confirmed-recovered-deaths)
 
 # Requirements
 
@@ -74,6 +84,8 @@ country <- function(Country_name="all"){
 }
 ```
 
+#### `all_countries`
+
 ### Returns a list of the countries available to select from
 
 ``` r
@@ -92,12 +104,82 @@ if (type != "all"){
 }
 ```
 
+#### `country_cases`
+
 ### Returns the number of cases for confirmed, active, deaths, and recovered for the country of interest (user specified).The default is “united-states”. Put a “-” in between each part of the country name if necessary.
 
 ``` r
-usa_cases <- function(type="united-states"){
-  url_usa_cases_df <- paste0("https://api.covid19api.com/total/country/",type)
-  usa_cases_df <- fromJSON(url_usa_cases_df) 
-  return(usa_cases_df)
+country_cases <- function(type="united-states"){
+  url_country_cases_df <- paste0("https://api.covid19api.com/total/country/",type)
+  country_cases_df <- fromJSON(url_usa_cases_df) 
+  return(country_cases_df)
+}
+```
+
+#### `live_cases`
+
+### Returns all live cases for a country of interest. The default is “united-states”. Put a “-” in between each part of the country name if necessary. You can also specify a date in the format “2021-07-12T00:00:00Z” and the Province.
+
+``` r
+live_cases <- function(type="united-states", date="all", province="all" ){
+  url_live_cases_df <- paste0("https://api.covid19api.com/live/country/",type)
+  live_cases_df <- fromJSON(url_live_cases_df) 
+  if (date != "all"){
+    #if date is in the Date column, subset for those rows
+    if (date %in% live_cases_df$Date) {
+      live_cases_df <- live_cases_df %>%
+          filter(Date == date)
+    }
+  }
+    if (province != "all"){
+    #if province is in the Province column, subset for those rows
+    if (province %in% live_cases_df$Province) {
+      live_cases_df <- live_cases_df %>%
+          filter(Province == province)
+    }
+    else {
+      message <- paste("ERROR: Argument for province or date was not found in the columns.")
+      stop(message)
+    }
+  }
+  #Do nothing if the province equals "all"
+  else{
+    
+  }
+  #Return data frame  
+  return(live_cases_df)
+    }
+```
+
+#### `world_totals`
+
+### Returns the world total for confirmed, deaths, and recovered cases
+
+``` r
+world_totals <- function(type="all"){
+world_totals_df <- fromJSON("https://api.covid19api.com/world/total")
+if (type != "all"){
+      message <- paste("ERROR: Argument for type was not found. Try type('all') to get the dataset.")
+      stop(message)
+    }
+  #Do nothing if the type equals "all"
+  else{
+    
+  }
+  #Return data frame
+  return(as.data.frame(world_totals_df))
+}
+```
+
+#### `day_one`
+
+### Returns all cases by case type for a country from the first recorded case. Cases must be one of: confirmed, recovered, deaths.
+
+``` r
+day_one <- function(type="south-africa", case="confirmed" ){
+  url_day_one_df <- paste0("https://api.covid19api.com/dayone/country/",type,"/","status","/",case)
+  day_one_df <- fromJSON(url_day_one_df) 
+  #Return data frame
+  return(day_one_df)
 }
 ```
