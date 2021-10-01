@@ -7,27 +7,12 @@ Jennifer Relihan
         the rest of the
         document:](#in-addition-to-those-packages-i-used-the-following-packages-in-the-rest-of-the-document)
 -   [API Interaction Functions](#api-interaction-functions)
-    -   [This function returns a data.frame with data on all countries.
-        You can also return just the rows for a single country by adding
-        the country name or
-        ID.](#this-function-returns-a-dataframe-with-data-on-all-countries-you-can-also-return-just-the-rows-for-a-single-country-by-adding-the-country-name-or-id)
-    -   [Returns a list of the countries available to select
-        from](#returns-a-list-of-the-countries-available-to-select-from)
-    -   [Returns the number of cases for confirmed, active, deaths, and
-        recovered for the country of interest (user specified).The
-        default is “united-states”. Put a “-” in between each part of
-        the country name if
-        necessary.](#returns-the-number-of-cases-for-confirmed-active-deaths-and-recovered-for-the-country-of-interest-user-specifiedthe-default-is-united-states-put-a---in-between-each-part-of-the-country-name-if-necessary)
-    -   [Returns all live cases for a country of interest. The default
-        is “united-states”. Put a “-” in between each part of the
-        country name if necessary. You can also specify a date in the
-        format “2021-07-12T00:00:00Z” and the
-        Province.](#returns-all-live-cases-for-a-country-of-interest-the-default-is-united-states-put-a---in-between-each-part-of-the-country-name-if-necessary-you-can-also-specify-a-date-in-the-format-2021-07-12t000000z-and-the-province)
-    -   [Returns the world total for confirmed, deaths, and recovered
-        cases](#returns-the-world-total-for-confirmed-deaths-and-recovered-cases)
-    -   [Returns all cases by case type for a country from the first
-        recorded case. Cases must be one of: confirmed, recovered,
-        deaths.](#returns-all-cases-by-case-type-for-a-country-from-the-first-recorded-case-cases-must-be-one-of-confirmed-recovered-deaths)
+    -   [`country`](#country)
+    -   [`all_countries`](#all_countries)
+    -   [`country_cases`](#country_cases)
+    -   [`live_cases`](#live_cases)
+    -   [`world_totals`](#world_totals)
+    -   [`day_one`](#day_one)
 
 # Requirements
 
@@ -48,9 +33,9 @@ Setting up working directory and reading in required packages.
 
 Here are the functions to interact with the Covid API.
 
-#### `country`
+### `country`
 
-### This function returns a data.frame with data on all countries. You can also return just the rows for a single country by adding the country name or ID.
+#### This function returns a data.frame with data on all countries. You can also return just the rows for a single country by adding the country name or ID.
 
 ``` r
 country <- function(Country_name="all"){
@@ -84,9 +69,9 @@ country <- function(Country_name="all"){
 }
 ```
 
-#### `all_countries`
+### `all_countries`
 
-### Returns a list of the countries available to select from
+#### Returns a list of the countries available to select from
 
 ``` r
 all_countries <- function(type="all"){
@@ -104,9 +89,9 @@ if (type != "all"){
 }
 ```
 
-#### `country_cases`
+### `country_cases`
 
-### Returns the number of cases for confirmed, active, deaths, and recovered for the country of interest (user specified).The default is “united-states”. Put a “-” in between each part of the country name if necessary.
+#### Returns the number of cases for confirmed, active, deaths, and recovered for the country of interest (user specified).The default is “united-states”. Put a “-” in between each part of the country name if necessary.
 
 ``` r
 country_cases <- function(type="united-states"){
@@ -116,9 +101,9 @@ country_cases <- function(type="united-states"){
 }
 ```
 
-#### `live_cases`
+### `live_cases`
 
-### Returns all live cases for a country of interest. The default is “united-states”. Put a “-” in between each part of the country name if necessary. You can also specify a date in the format “2021-07-12T00:00:00Z” and the Province.
+#### Returns all live cases for a country of interest. The default is “united-states”. Put a “-” in between each part of the country name if necessary. You can also specify a date in the format “2021-07-12T00:00:00Z” and the Province.
 
 ``` r
 live_cases <- function(type="united-states", date="all", province="all" ){
@@ -151,9 +136,9 @@ live_cases <- function(type="united-states", date="all", province="all" ){
     }
 ```
 
-#### `world_totals`
+### `world_totals`
 
-### Returns the world total for confirmed, deaths, and recovered cases
+#### Returns the world total for confirmed, deaths, and recovered cases
 
 ``` r
 world_totals <- function(type="all"){
@@ -171,9 +156,9 @@ if (type != "all"){
 }
 ```
 
-#### `day_one`
+### `day_one`
 
-### Returns all cases by case type for a country from the first recorded case. Cases must be one of: confirmed, recovered, deaths.
+#### Returns all cases by case type for a country from the first recorded case. Cases must be one of: confirmed, recovered, deaths.
 
 ``` r
 day_one <- function(type="south-africa", case="confirmed" ){
