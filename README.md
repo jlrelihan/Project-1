@@ -3,9 +3,6 @@ Project 1
 Jennifer Relihan
 
 -   [Requirements](#requirements)
-    -   [In addition to those packages, I used the following packages in
-        the rest of the
-        document:](#in-addition-to-those-packages-i-used-the-following-packages-in-the-rest-of-the-document)
 -   [API Interaction Functions](#api-interaction-functions)
     -   [`country`](#country)
     -   [`all_countries`](#all_countries)
@@ -20,14 +17,9 @@ To use the functions for interacting with the COVID API, I used the
 following packages:  
 \* `httr` \* `jsonlite`
 
-## In addition to those packages, I used the following packages in the rest of the document:
-
-    * `rmarkdown`
-    * `base`
-    * `tidyverse`
-    * `dplyr`
-
-Setting up working directory and reading in required packages.
+In addition to those packages, I used the following packages in the rest
+of the document:  
+\* `rmarkdown` \* `base` \* `tidyverse` \* `dplyr`
 
 # API Interaction Functions
 
