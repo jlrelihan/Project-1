@@ -11,6 +11,8 @@ Jennifer Relihan
     -   [`world_totals`](#world_totals)
     -   [`day_one`](#day_one)
 -   [Data Exploration](#data-exploration)
+    -   [Percent of deaths by province in the United
+        States.](#percent-of-deaths-by-province-in-the-united-states)
 
 # Requirements
 
@@ -164,7 +166,7 @@ day_one <- function(type="south-africa", case="confirmed" ){
 
 # Data Exploration
 
-Pulling in data
+Pulling in data.
 
 ``` r
 #list of all countries available
@@ -175,11 +177,11 @@ all_country_df<- country(Country_name = "all")
 current_cases_df<- live_cases(type="united-states",date = "2021-10-04T00:00:00Z", province = "all")
 ```
 
-Creating new variables:  
-\* Percent of confirmed cases grouped by province
+Creating new variables: \#\#\# Percent of confirmed cases by province in
+the United States.
 
 ``` r
-#Changing integer to numeric
+#Changing integer columns to numeric
 current_cases_df[,9:12]<- lapply(current_cases_df[,9:12],as.numeric)
 #Sum of the confirmed cases
 sum_confirmed <- sum(current_cases_df$Confirmed)
@@ -187,4 +189,15 @@ sum_confirmed <- sum(current_cases_df$Confirmed)
 current_cases_df <- current_cases_df %>% mutate(Percent_Confirmed= (Confirmed/sum_confirmed)*100)
 #Rounding percent confirmed to min amount of digits
 current_cases_df[,14]<- round(current_cases_df$Percent_Confirmed, digits = 2)
+```
+
+### Percent of deaths by province in the United States.
+
+``` r
+# Sum of deaths
+sum_deaths <- sum(current_cases_df$Deaths)
+# Percent of deaths by province
+current_cases_df <- current_cases_df %>% mutate(Percent_Deaths=(Deaths/sum_deaths)*100)
+#Rounding percent deaths to min amount of digits
+current_cases_df[,15]<- round(current_cases_df$Percent_Deaths, digits = 2)
 ```
