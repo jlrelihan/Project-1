@@ -10,6 +10,7 @@ Jennifer Relihan
     -   [`live_cases`](#live_cases)
     -   [`world_totals`](#world_totals)
     -   [`day_one`](#day_one)
+-   [Data Exploration](#data-exploration)
 
 # Requirements
 
@@ -19,7 +20,7 @@ following packages:
 
 In addition to those packages, I used the following packages in the rest
 of the document:  
-\* `rmarkdown` \* `base` \* `tidyverse` \* `dplyr`
+\* `rmarkdown` \* `base` \* `tidyverse` \* `dplyr` \* `magrittr`
 
 # API Interaction Functions
 
@@ -150,7 +151,7 @@ if (type != "all"){
 
 ### `day_one`
 
-#### Returns all cases by case type for a country from the first recorded case. Cases must be one of: confirmed, recovered, deaths.
+#### Returns all cases by case type for a country from the first recorded case. Cases must be one of: confirmed, recovered, deaths. Formatting for type is either by Country name or slug (South Africa or south-africa)
 
 ``` r
 day_one <- function(type="south-africa", case="confirmed" ){
@@ -159,4 +160,31 @@ day_one <- function(type="south-africa", case="confirmed" ){
   #Return data frame
   return(day_one_df)
 }
+```
+
+# Data Exploration
+
+Pulling in data
+
+``` r
+#list of all countries available
+country_list_df<- all_countries(type="all")
+#All countries data
+all_country_df<- country(Country_name = "all")
+# Current cases in the US as of 10-04-2021
+current_cases_df<- live_cases(type="united-states",date = "2021-10-04T00:00:00Z", province = "all")
+```
+
+Creating new variables:  
+\* Percent of confirmed cases grouped by province
+
+``` r
+#Changing integer to numeric
+current_cases_df[,9:12]<- lapply(current_cases_df[,9:12],as.numeric)
+#Sum of the confirmed cases
+sum_confirmed <- sum(current_cases_df$Confirmed)
+#Percent of confirmed cases by province
+current_cases_df <- current_cases_df %>% mutate(Percent_Confirmed= (Confirmed/sum_confirmed)*100)
+#Rounding percent confirmed to min amount of digits
+current_cases_df[,14]<- round(current_cases_df$Percent_Confirmed, digits = 2)
 ```
