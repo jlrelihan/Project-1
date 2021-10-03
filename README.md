@@ -11,11 +11,19 @@ Jennifer Relihan
         You can also return just the rows for a single country by adding
         the country name or
         ID.](#this-function-returns-a-dataframe-with-data-on-all-countries-you-can-also-return-just-the-rows-for-a-single-country-by-adding-the-country-name-or-id)
+    -   [Returns a list of the countries available to select
+        from](#returns-a-list-of-the-countries-available-to-select-from)
+    -   [Returns the number of cases for confirmed, active, deaths, and
+        recovered for the country of interest (user specified).The
+        default is “united-states”. Put a “-” in between each part of
+        the country name if
+        necessary.](#returns-the-number-of-cases-for-confirmed-active-deaths-and-recovered-for-the-country-of-interest-user-specifiedthe-default-is-united-states-put-a---in-between-each-part-of-the-country-name-if-necessary)
 
 # Requirements
 
-To use the functions for interacting with the Covid API, I used the
-following packages: \* `httr` \* `jsonlite`
+To use the functions for interacting with the COVID API, I used the
+following packages:  
+\* `httr` \* `jsonlite`
 
 ## In addition to those packages, I used the following packages in the rest of the document:
 
@@ -25,17 +33,6 @@ following packages: \* `httr` \* `jsonlite`
     * `dplyr`
 
 Setting up working directory and reading in required packages.
-
-Setting up working directory and reading in required packages.
-
-``` r
-library(rmarkdown)
-library(httr)
-library(jsonlite)
-library(base)
-library(tidyverse)
-library(dplyr)
-```
 
 # API Interaction Functions
 
@@ -74,5 +71,33 @@ country <- function(Country_name="all"){
   }
   #Return data frame
   return(country_df)
+}
+```
+
+### Returns a list of the countries available to select from
+
+``` r
+all_countries <- function(type="all"){
+all_countries_df <- fromJSON("https://api.covid19api.com/countries")
+if (type != "all"){
+      message <- paste("ERROR: Argument for type was not found. Try type('all') to get the list of countries.")
+      stop(message)
+    }
+  #Do nothing if the type equals "all"
+  else{
+    
+  }
+  #Return data frame
+  return(all_countries_df)
+}
+```
+
+### Returns the number of cases for confirmed, active, deaths, and recovered for the country of interest (user specified).The default is “united-states”. Put a “-” in between each part of the country name if necessary.
+
+``` r
+usa_cases <- function(type="united-states"){
+  url_usa_cases_df <- paste0("https://api.covid19api.com/total/country/",type)
+  usa_cases_df <- fromJSON(url_usa_cases_df) 
+  return(usa_cases_df)
 }
 ```
