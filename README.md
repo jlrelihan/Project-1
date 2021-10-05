@@ -21,11 +21,21 @@ Jennifer Relihan
         -   [Contingency Tables:](#contingency-tables)
         -   [Numerical Summaries](#numerical-summaries)
     -   [Plots:](#plots)
-        -   [Bar Plot](#bar-plot)
-        -   [Histogram](#histogram)
-        -   [Box Plot](#box-plot)
-        -   [Scatter Plot](#scatter-plot)
-        -   [General Plots](#general-plots)
+        -   [Bar Plot: Here I graphed each State and the number of
+            confirmed cases colored by case
+            count.](#bar-plot-here-i-graphed-each-state-and-the-number-of-confirmed-cases-colored-by-case-count)
+        -   [Histogram: Here I graphed a histogram showing the frequency
+            distribution of
+            deaths.](#histogram-here-i-graphed-a-histogram-showing-the-frequency-distribution-of-deaths)
+        -   [Box Plot: Here I graphed the distribution of the United
+            States death count. You can clearly see three outliers that
+            are represented in the first bar
+            chart.](#box-plot-here-i-graphed-the-distribution-of-the-united-states-death-count-you-can-clearly-see-three-outliers-that-are-represented-in-the-first-bar-chart)
+        -   [Scatter Plot: Here you can see the relationship between
+            confirmed cases and deaths in the
+            U.S.](#scatter-plot-here-you-can-see-the-relationship-between-confirmed-cases-and-deaths-in-the-us)
+        -   [ECDF - Emipirical Cumulative Distribution
+            Function](#ecdf---emipirical-cumulative-distribution-function)
 
 # Requirements
 
@@ -225,245 +235,113 @@ current_cases_df[,15]<- round(current_cases_df$Percent_Deaths, digits = 2)
 
 ``` r
 #Showing how many rows for each state
-table(current_cases_df$Province)
+print(table(current_cases_df$Province))
 ```
 
     ## 
-    ##                  Alabama                   Alaska                  Arizona 
-    ##                        1                        1                        1 
-    ##                 Arkansas               California                 Colorado 
-    ##                        1                        1                        1 
-    ##              Connecticut                 Delaware     District of Columbia 
-    ##                        1                        1                        1 
-    ##                  Florida                  Georgia                     Guam 
-    ##                        1                        1                        1 
-    ##                   Hawaii                    Idaho                 Illinois 
-    ##                        1                        1                        1 
-    ##                  Indiana                     Iowa                   Kansas 
-    ##                        1                        1                        1 
-    ##                 Kentucky                Louisiana                    Maine 
-    ##                        1                        1                        1 
-    ##                 Maryland            Massachusetts                 Michigan 
-    ##                        1                        1                        1 
-    ##                Minnesota              Mississippi                 Missouri 
-    ##                        1                        1                        1 
-    ##                  Montana                 Nebraska                   Nevada 
-    ##                        1                        1                        1 
-    ##            New Hampshire               New Jersey               New Mexico 
-    ##                        1                        1                        1 
-    ##                 New York           North Carolina             North Dakota 
-    ##                        1                        1                        1 
-    ## Northern Mariana Islands                     Ohio                 Oklahoma 
-    ##                        1                        1                        1 
-    ##                   Oregon             Pennsylvania              Puerto Rico 
-    ##                        1                        1                        1 
-    ##             Rhode Island           South Carolina             South Dakota 
-    ##                        1                        1                        1 
-    ##                Tennessee                    Texas                     Utah 
-    ##                        1                        1                        1 
-    ##                  Vermont           Virgin Islands                 Virginia 
-    ##                        1                        1                        1 
-    ##               Washington            West Virginia                Wisconsin 
-    ##                        1                        1                        1 
+    ##                  Alabama                   Alaska                  Arizona                 Arkansas               California                 Colorado 
+    ##                        1                        1                        1                        1                        1                        1 
+    ##              Connecticut                 Delaware     District of Columbia                  Florida                  Georgia                     Guam 
+    ##                        1                        1                        1                        1                        1                        1 
+    ##                   Hawaii                    Idaho                 Illinois                  Indiana                     Iowa                   Kansas 
+    ##                        1                        1                        1                        1                        1                        1 
+    ##                 Kentucky                Louisiana                    Maine                 Maryland            Massachusetts                 Michigan 
+    ##                        1                        1                        1                        1                        1                        1 
+    ##                Minnesota              Mississippi                 Missouri                  Montana                 Nebraska                   Nevada 
+    ##                        1                        1                        1                        1                        1                        1 
+    ##            New Hampshire               New Jersey               New Mexico                 New York           North Carolina             North Dakota 
+    ##                        1                        1                        1                        1                        1                        1 
+    ## Northern Mariana Islands                     Ohio                 Oklahoma                   Oregon             Pennsylvania              Puerto Rico 
+    ##                        1                        1                        1                        1                        1                        1 
+    ##             Rhode Island           South Carolina             South Dakota                Tennessee                    Texas                     Utah 
+    ##                        1                        1                        1                        1                        1                        1 
+    ##                  Vermont           Virgin Islands                 Virginia               Washington            West Virginia                Wisconsin 
+    ##                        1                        1                        1                        1                        1                        1 
     ##                  Wyoming 
     ##                        1
 
 ``` r
 # Showing how many rows for each Country
-table(all_country_df$Country)
+print(table(all_country_df$Country))
 ```
 
     ## 
-    ##                     Afghanistan                         Albania 
-    ##                               1                               1 
-    ##                         Algeria                         Andorra 
-    ##                               1                               1 
-    ##                          Angola             Antigua and Barbuda 
-    ##                               1                               1 
-    ##                       Argentina                         Armenia 
-    ##                               1                               1 
-    ##                       Australia                         Austria 
-    ##                               1                               1 
-    ##                      Azerbaijan                         Bahamas 
-    ##                               1                               1 
-    ##                         Bahrain                      Bangladesh 
-    ##                               1                               1 
-    ##                        Barbados                         Belarus 
-    ##                               1                               1 
-    ##                         Belgium                          Belize 
-    ##                               1                               1 
-    ##                           Benin                          Bhutan 
-    ##                               1                               1 
-    ##                         Bolivia          Bosnia and Herzegovina 
-    ##                               1                               1 
-    ##                        Botswana                          Brazil 
-    ##                               1                               1 
-    ##               Brunei Darussalam                        Bulgaria 
-    ##                               1                               1 
-    ##                    Burkina Faso                         Burundi 
-    ##                               1                               1 
-    ##                        Cambodia                        Cameroon 
-    ##                               1                               1 
-    ##                          Canada                      Cape Verde 
-    ##                               1                               1 
-    ##        Central African Republic                            Chad 
-    ##                               1                               1 
-    ##                           Chile                           China 
-    ##                               1                               1 
-    ##                        Colombia                         Comoros 
-    ##                               1                               1 
-    ##             Congo (Brazzaville)                Congo (Kinshasa) 
-    ##                               1                               1 
-    ##                      Costa Rica                   Côte d'Ivoire 
-    ##                               1                               1 
-    ##                         Croatia                            Cuba 
-    ##                               1                               1 
-    ##                          Cyprus                  Czech Republic 
-    ##                               1                               1 
-    ##                         Denmark                        Djibouti 
-    ##                               1                               1 
-    ##                        Dominica              Dominican Republic 
-    ##                               1                               1 
-    ##                         Ecuador                           Egypt 
-    ##                               1                               1 
-    ##                     El Salvador               Equatorial Guinea 
-    ##                               1                               1 
-    ##                         Eritrea                         Estonia 
-    ##                               1                               1 
-    ##                        Ethiopia                            Fiji 
-    ##                               1                               1 
-    ##                         Finland                          France 
-    ##                               1                               1 
-    ##                           Gabon                          Gambia 
-    ##                               1                               1 
-    ##                         Georgia                         Germany 
-    ##                               1                               1 
-    ##                           Ghana                          Greece 
-    ##                               1                               1 
-    ##                         Grenada                       Guatemala 
-    ##                               1                               1 
-    ##                          Guinea                   Guinea-Bissau 
-    ##                               1                               1 
-    ##                          Guyana                           Haiti 
-    ##                               1                               1 
-    ##   Holy See (Vatican City State)                        Honduras 
-    ##                               1                               1 
-    ##                         Hungary                         Iceland 
-    ##                               1                               1 
-    ##                           India                       Indonesia 
-    ##                               1                               1 
-    ##       Iran, Islamic Republic of                            Iraq 
-    ##                               1                               1 
-    ##                         Ireland                          Israel 
-    ##                               1                               1 
-    ##                           Italy                         Jamaica 
-    ##                               1                               1 
-    ##                           Japan                          Jordan 
-    ##                               1                               1 
-    ##                      Kazakhstan                           Kenya 
-    ##                               1                               1 
-    ##                        Kiribati                   Korea (South) 
-    ##                               1                               1 
-    ##                          Kuwait                      Kyrgyzstan 
-    ##                               1                               1 
-    ##                         Lao PDR                          Latvia 
-    ##                               1                               1 
-    ##                         Lebanon                         Lesotho 
-    ##                               1                               1 
-    ##                         Liberia                           Libya 
-    ##                               1                               1 
-    ##                   Liechtenstein                       Lithuania 
-    ##                               1                               1 
-    ##                      Luxembourg          Macedonia, Republic of 
-    ##                               1                               1 
-    ##                      Madagascar                          Malawi 
-    ##                               1                               1 
-    ##                        Malaysia                        Maldives 
-    ##                               1                               1 
-    ##                            Mali                           Malta 
-    ##                               1                               1 
-    ##                Marshall Islands                      Mauritania 
-    ##                               1                               1 
-    ##                       Mauritius                          Mexico 
-    ##                               1                               1 
-    ## Micronesia, Federated States of                         Moldova 
-    ##                               1                               1 
-    ##                          Monaco                        Mongolia 
-    ##                               1                               1 
-    ##                      Montenegro                         Morocco 
-    ##                               1                               1 
-    ##                      Mozambique                         Myanmar 
-    ##                               1                               1 
-    ##                         Namibia                           Nepal 
-    ##                               1                               1 
-    ##                     Netherlands                     New Zealand 
-    ##                               1                               1 
-    ##                       Nicaragua                           Niger 
-    ##                               1                               1 
-    ##                         Nigeria                          Norway 
-    ##                               1                               1 
-    ##                            Oman                        Pakistan 
-    ##                               1                               1 
-    ##                           Palau           Palestinian Territory 
-    ##                               1                               1 
-    ##                          Panama                Papua New Guinea 
-    ##                               1                               1 
-    ##                        Paraguay                            Peru 
-    ##                               1                               1 
-    ##                     Philippines                          Poland 
-    ##                               1                               1 
-    ##                        Portugal                           Qatar 
-    ##                               1                               1 
-    ##              Republic of Kosovo                         Romania 
-    ##                               1                               1 
-    ##              Russian Federation                          Rwanda 
-    ##                               1                               1 
-    ##           Saint Kitts and Nevis                     Saint Lucia 
-    ##                               1                               1 
-    ##    Saint Vincent and Grenadines                           Samoa 
-    ##                               1                               1 
-    ##                      San Marino           Sao Tome and Principe 
-    ##                               1                               1 
-    ##                    Saudi Arabia                         Senegal 
-    ##                               1                               1 
-    ##                          Serbia                      Seychelles 
-    ##                               1                               1 
-    ##                    Sierra Leone                       Singapore 
-    ##                               1                               1 
-    ##                        Slovakia                        Slovenia 
-    ##                               1                               1 
-    ##                 Solomon Islands                         Somalia 
-    ##                               1                               1 
-    ##                    South Africa                     South Sudan 
-    ##                               1                               1 
-    ##                           Spain                       Sri Lanka 
-    ##                               1                               1 
-    ##                           Sudan                        Suriname 
-    ##                               1                               1 
-    ##                       Swaziland                          Sweden 
-    ##                               1                               1 
-    ##                     Switzerland    Syrian Arab Republic (Syria) 
-    ##                               1                               1 
-    ##       Taiwan, Republic of China                      Tajikistan 
-    ##                               1                               1 
-    ##    Tanzania, United Republic of                        Thailand 
-    ##                               1                               1 
-    ##                     Timor-Leste                            Togo 
-    ##                               1                               1 
-    ##             Trinidad and Tobago                         Tunisia 
-    ##                               1                               1 
-    ##                          Turkey                          Uganda 
-    ##                               1                               1 
-    ##                         Ukraine            United Arab Emirates 
-    ##                               1                               1 
-    ##                  United Kingdom        United States of America 
-    ##                               1                               1 
-    ##                         Uruguay                      Uzbekistan 
-    ##                               1                               1 
-    ##                         Vanuatu Venezuela (Bolivarian Republic) 
-    ##                               1                               1 
-    ##                        Viet Nam                           Yemen 
-    ##                               1                               1 
+    ##                     Afghanistan                         Albania                         Algeria                         Andorra                          Angola 
+    ##                               1                               1                               1                               1                               1 
+    ##             Antigua and Barbuda                       Argentina                         Armenia                       Australia                         Austria 
+    ##                               1                               1                               1                               1                               1 
+    ##                      Azerbaijan                         Bahamas                         Bahrain                      Bangladesh                        Barbados 
+    ##                               1                               1                               1                               1                               1 
+    ##                         Belarus                         Belgium                          Belize                           Benin                          Bhutan 
+    ##                               1                               1                               1                               1                               1 
+    ##                         Bolivia          Bosnia and Herzegovina                        Botswana                          Brazil               Brunei Darussalam 
+    ##                               1                               1                               1                               1                               1 
+    ##                        Bulgaria                    Burkina Faso                         Burundi                        Cambodia                        Cameroon 
+    ##                               1                               1                               1                               1                               1 
+    ##                          Canada                      Cape Verde        Central African Republic                            Chad                           Chile 
+    ##                               1                               1                               1                               1                               1 
+    ##                           China                        Colombia                         Comoros             Congo (Brazzaville)                Congo (Kinshasa) 
+    ##                               1                               1                               1                               1                               1 
+    ##                      Costa Rica                   Côte d'Ivoire                         Croatia                            Cuba                          Cyprus 
+    ##                               1                               1                               1                               1                               1 
+    ##                  Czech Republic                         Denmark                        Djibouti                        Dominica              Dominican Republic 
+    ##                               1                               1                               1                               1                               1 
+    ##                         Ecuador                           Egypt                     El Salvador               Equatorial Guinea                         Eritrea 
+    ##                               1                               1                               1                               1                               1 
+    ##                         Estonia                        Ethiopia                            Fiji                         Finland                          France 
+    ##                               1                               1                               1                               1                               1 
+    ##                           Gabon                          Gambia                         Georgia                         Germany                           Ghana 
+    ##                               1                               1                               1                               1                               1 
+    ##                          Greece                         Grenada                       Guatemala                          Guinea                   Guinea-Bissau 
+    ##                               1                               1                               1                               1                               1 
+    ##                          Guyana                           Haiti   Holy See (Vatican City State)                        Honduras                         Hungary 
+    ##                               1                               1                               1                               1                               1 
+    ##                         Iceland                           India                       Indonesia       Iran, Islamic Republic of                            Iraq 
+    ##                               1                               1                               1                               1                               1 
+    ##                         Ireland                          Israel                           Italy                         Jamaica                           Japan 
+    ##                               1                               1                               1                               1                               1 
+    ##                          Jordan                      Kazakhstan                           Kenya                        Kiribati                   Korea (South) 
+    ##                               1                               1                               1                               1                               1 
+    ##                          Kuwait                      Kyrgyzstan                         Lao PDR                          Latvia                         Lebanon 
+    ##                               1                               1                               1                               1                               1 
+    ##                         Lesotho                         Liberia                           Libya                   Liechtenstein                       Lithuania 
+    ##                               1                               1                               1                               1                               1 
+    ##                      Luxembourg          Macedonia, Republic of                      Madagascar                          Malawi                        Malaysia 
+    ##                               1                               1                               1                               1                               1 
+    ##                        Maldives                            Mali                           Malta                Marshall Islands                      Mauritania 
+    ##                               1                               1                               1                               1                               1 
+    ##                       Mauritius                          Mexico Micronesia, Federated States of                         Moldova                          Monaco 
+    ##                               1                               1                               1                               1                               1 
+    ##                        Mongolia                      Montenegro                         Morocco                      Mozambique                         Myanmar 
+    ##                               1                               1                               1                               1                               1 
+    ##                         Namibia                           Nepal                     Netherlands                     New Zealand                       Nicaragua 
+    ##                               1                               1                               1                               1                               1 
+    ##                           Niger                         Nigeria                          Norway                            Oman                        Pakistan 
+    ##                               1                               1                               1                               1                               1 
+    ##                           Palau           Palestinian Territory                          Panama                Papua New Guinea                        Paraguay 
+    ##                               1                               1                               1                               1                               1 
+    ##                            Peru                     Philippines                          Poland                        Portugal                           Qatar 
+    ##                               1                               1                               1                               1                               1 
+    ##              Republic of Kosovo                         Romania              Russian Federation                          Rwanda           Saint Kitts and Nevis 
+    ##                               1                               1                               1                               1                               1 
+    ##                     Saint Lucia    Saint Vincent and Grenadines                           Samoa                      San Marino           Sao Tome and Principe 
+    ##                               1                               1                               1                               1                               1 
+    ##                    Saudi Arabia                         Senegal                          Serbia                      Seychelles                    Sierra Leone 
+    ##                               1                               1                               1                               1                               1 
+    ##                       Singapore                        Slovakia                        Slovenia                 Solomon Islands                         Somalia 
+    ##                               1                               1                               1                               1                               1 
+    ##                    South Africa                     South Sudan                           Spain                       Sri Lanka                           Sudan 
+    ##                               1                               1                               1                               1                               1 
+    ##                        Suriname                       Swaziland                          Sweden                     Switzerland    Syrian Arab Republic (Syria) 
+    ##                               1                               1                               1                               1                               1 
+    ##       Taiwan, Republic of China                      Tajikistan    Tanzania, United Republic of                        Thailand                     Timor-Leste 
+    ##                               1                               1                               1                               1                               1 
+    ##                            Togo             Trinidad and Tobago                         Tunisia                          Turkey                          Uganda 
+    ##                               1                               1                               1                               1                               1 
+    ##                         Ukraine            United Arab Emirates                  United Kingdom        United States of America                         Uruguay 
+    ##                               1                               1                               1                               1                               1 
+    ##                      Uzbekistan                         Vanuatu Venezuela (Bolivarian Republic)                        Viet Nam                           Yemen 
+    ##                               1                               1                               1                               1                               1 
     ##                          Zambia                        Zimbabwe 
     ##                               1                               1
 
@@ -471,14 +349,14 @@ table(all_country_df$Country)
 
 ``` r
 # Mean of Current Deaths in the U.S. 
-mean(current_cases_df$Deaths)
+print(mean(current_cases_df$Deaths))
 ```
 
     ## [1] 12748.53
 
 ``` r
 # Summary of current confirmed cases in the U.S.
-summary(current_cases_df$Confirmed)
+print(summary(current_cases_df$Confirmed))
 ```
 
     ##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
@@ -486,7 +364,7 @@ summary(current_cases_df$Confirmed)
 
 ``` r
 # Quantiles of current confirmed cases in the U.S.
-quantile(current_cases_df$Confirmed)
+print(quantile(current_cases_df$Confirmed))
 ```
 
     ##      0%     25%     50%     75%    100% 
@@ -494,35 +372,50 @@ quantile(current_cases_df$Confirmed)
 
 ## Plots:
 
-### Bar Plot
+### Bar Plot: Here I graphed each State and the number of confirmed cases colored by case count.
 
 ``` r
-bar <- ggplot(current_cases_df, aes(x=Province,y=Confirmed))
-bar + geom_col(aes(fill=Confirmed)) + theme_gray() + labs(x="State",y="Confirmed Cases", title = "Confirmed Cases in the United States") + guides(x=guide_axis(angle=90))
+bar <- ggplot(current_cases_df, aes(x=Province,y=Confirmed)) + geom_col(aes(fill=Confirmed)) + theme_gray() + labs(x="State",y="Confirmed Cases", title = "Confirmed Cases in the United States") + guides(x=guide_axis(angle=90))
+bar
 ```
 
-![](README_files/figure-gfm/unnamed-chunk-198-1.jpeg)<!-- -->
+![](README_files/figure-gfm/unnamed-chunk-102-1.jpeg)<!-- -->
 
-### Histogram
+### Histogram: Here I graphed a histogram showing the frequency distribution of deaths.
 
 ``` r
-his <- ggplot(current_cases_df, aes(x=Deaths))
-his + geom_histogram(fill="darkslategray") + theme_gray() + labs(x="Number of Deaths",y="Count", title = "Count of States Number of Deaths")
+his <- ggplot(current_cases_df, aes(x=Deaths)) + geom_histogram(fill="darkslategray") + theme_gray() + labs(x="Number of Deaths",y="Count", title = "Count of States Number of Deaths")
+his
 ```
 
     ## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.
 
-![](README_files/figure-gfm/unnamed-chunk-199-1.jpeg)<!-- -->
+![](README_files/figure-gfm/unnamed-chunk-103-1.jpeg)<!-- -->
 
-### Box Plot
+### Box Plot: Here I graphed the distribution of the United States death count. You can clearly see three outliers that are represented in the first bar chart.
 
 ``` r
-box <- ggplot(current_cases_df, aes(x=Country,y=Deaths))
-box + geom_boxplot(fill="grey") + theme_gray() + labs(x="Country",y="Death Count", title = "Count of Number of Deaths")
+box <- ggplot(current_cases_df, aes(x=Country,y=Deaths)) + geom_boxplot(fill="grey") + theme_gray() + labs(x="Country",y="Death Count", title = "Count of Number of Deaths")
+box
 ```
 
-![](README_files/figure-gfm/unnamed-chunk-200-1.jpeg)<!-- -->
+![](README_files/figure-gfm/unnamed-chunk-104-1.jpeg)<!-- -->
 
-### Scatter Plot
+### Scatter Plot: Here you can see the relationship between confirmed cases and deaths in the U.S.
 
-### General Plots
+``` r
+correlation <- cor(current_cases_df$Confirmed,current_cases_df$Deaths)
+scatter <- ggplot(current_cases_df, aes(x=Confirmed, y=Deaths)) + geom_point()+ theme_gray() + labs(x="Confirmed Cases",y="Death Count", title = "Relation of Confirmed Cases to Death Count by Province") + geom_text(x=4e+06, y=10000, size=5, label=paste0("Correlation = ", round(correlation,2)))
+scatter
+```
+
+![](README_files/figure-gfm/unnamed-chunk-105-1.jpeg)<!-- -->
+
+### ECDF - Emipirical Cumulative Distribution Function
+
+``` r
+ECDF <- ggplot(current_cases_df_select_states, aes(x=Deaths)) + stat_ecdf(geom="step") + theme_gray() + labs(x="Number of Deaths",y="Count", title = "ECDF Chart") + ylab("ECDF")
+ECDF
+```
+
+![](README_files/figure-gfm/unnamed-chunk-106-1.jpeg)<!-- -->
