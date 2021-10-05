@@ -376,46 +376,46 @@ print(quantile(current_cases_df$Confirmed))
 
 ``` r
 bar <- ggplot(current_cases_df, aes(x=Province,y=Confirmed)) + geom_col(aes(fill=Confirmed)) + theme_gray() + labs(x="State",y="Confirmed Cases", title = "Confirmed Cases in the United States") + guides(x=guide_axis(angle=90))
-bar
+print(bar)
 ```
 
-![](README_files/figure-gfm/unnamed-chunk-102-1.jpeg)<!-- -->
+![](README_files/figure-gfm/unnamed-chunk-13-1.jpeg)<!-- -->
 
 ### Histogram: Here I graphed a histogram showing the frequency distribution of deaths.
 
 ``` r
 his <- ggplot(current_cases_df, aes(x=Deaths)) + geom_histogram(fill="darkslategray") + theme_gray() + labs(x="Number of Deaths",y="Count", title = "Count of States Number of Deaths")
-his
+print(his)
 ```
 
     ## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.
 
-![](README_files/figure-gfm/unnamed-chunk-103-1.jpeg)<!-- -->
+![](README_files/figure-gfm/unnamed-chunk-14-1.jpeg)<!-- -->
 
 ### Box Plot: Here I graphed the distribution of the United States death count. You can clearly see three outliers that are represented in the first bar chart.
 
 ``` r
 box <- ggplot(current_cases_df, aes(x=Country,y=Deaths)) + geom_boxplot(fill="grey") + theme_gray() + labs(x="Country",y="Death Count", title = "Count of Number of Deaths")
-box
+print(box)
 ```
 
-![](README_files/figure-gfm/unnamed-chunk-104-1.jpeg)<!-- -->
+![](README_files/figure-gfm/unnamed-chunk-15-1.jpeg)<!-- -->
 
 ### Scatter Plot: Here you can see the relationship between confirmed cases and deaths in the U.S.
 
 ``` r
 correlation <- cor(current_cases_df$Confirmed,current_cases_df$Deaths)
 scatter <- ggplot(current_cases_df, aes(x=Confirmed, y=Deaths)) + geom_point()+ theme_gray() + labs(x="Confirmed Cases",y="Death Count", title = "Relation of Confirmed Cases to Death Count by Province") + geom_text(x=4e+06, y=10000, size=5, label=paste0("Correlation = ", round(correlation,2)))
-scatter
+print(scatter)
 ```
 
-![](README_files/figure-gfm/unnamed-chunk-105-1.jpeg)<!-- -->
+![](README_files/figure-gfm/unnamed-chunk-16-1.jpeg)<!-- -->
 
 ### ECDF - Emipirical Cumulative Distribution Function
 
 ``` r
 ECDF <- ggplot(current_cases_df_select_states, aes(x=Deaths)) + stat_ecdf(geom="step") + theme_gray() + labs(x="Number of Deaths",y="Count", title = "ECDF Chart") + ylab("ECDF")
-ECDF
+print(ECDF)
 ```
 
-![](README_files/figure-gfm/unnamed-chunk-106-1.jpeg)<!-- -->
+![](README_files/figure-gfm/unnamed-chunk-17-1.jpeg)<!-- -->
